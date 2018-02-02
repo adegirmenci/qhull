@@ -1,3 +1,16 @@
+Forked for use with HBL_RT4DUSreconstruction
+
+Note: To link this with HBL_RT4DUSreconstruction:
+1) Build qhull-all in Qt
+2) Open qhull-libqhull-src_r.pri
+3) Comment out line 23: #SOURCES += ../libqhull_r/userprintf_r.c
+4) Rebuild ONLY libqhull_r
+
+Otherwise, during linking of HBL_RT4DUSreconstruction, linker will
+complain about userprintf_r being defined multiple times.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Name
 
       qhull, rbox         2015.2       2016/01/18
