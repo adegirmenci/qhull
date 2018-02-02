@@ -12,6 +12,7 @@
 #include "libqhullcpp/QhullPoint.h"
 #include "libqhullcpp/QhullVertex.h"
 #include "libqhullcpp/QhullFacet.h"
+#include "libqhullcpp/PointCoordinates.h"
 
 namespace orgQhull {
 
@@ -38,6 +39,11 @@ namespace orgQhull {
 
 #//!\name Defined here
     class Qhull;
+	
+struct float3qhull
+{
+	float x, y, z;
+};
 
 //! Interface to Qhull from C++
 class Qhull {
@@ -48,7 +54,8 @@ private:
     Coordinates         origin_point;   //! origin for qh_qh->hull_dim.  Set by runQhull()
     bool                run_called;     //! True at start of runQhull.  Errors if call again.
     Coordinates         feasible_point;  //! feasible point for half-space intersection (alternative to qh.feasible_string for qh.feasible_point)
-
+	PointCoordinates    *m_externalPoints;
+	
 public:
 #//!\name Constructors
                         Qhull();      //!< call runQhull() next
@@ -120,6 +127,8 @@ public:
     void                outputQhull(const char * outputflags);
     void                runQhull(const RboxPoints &rboxPoints, const char *qhullCommand2);
     void                runQhull(const char *inputComment2, int pointDimension, int pointCount, const realT *pointCoordinates, const char *qhullCommand2);
+	void				runQhull3D(const std::vector<float3qhull> &points, const char *args);
+	void				runQhull(const PointCoordinates &points, const char *qhullCommand2);
     double              volume();
 
 #//!\name Helpers
